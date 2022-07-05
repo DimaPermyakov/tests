@@ -1,3 +1,5 @@
+import math
+
 from header import User
 from header import Matrix
 from source import *
@@ -63,4 +65,7 @@ a = get_filter(a, lambda num: num < 0)
 print(*a)
 '''
 
-print(NOD(1, 56))
+# print(trim_string('C:', 'Users', 'dimap', 'PycharmProjects', 'tests', sep='\\', trim=True))
+
+# differential for sin, using the decorator.
+print(sin_x(math.pi / 3))

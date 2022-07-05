@@ -1,7 +1,45 @@
-# recursion.
 import time
+import math
+from functools import wraps  # для сохранения имени и документации функций при декораторах.
 
 
+def test_time(func):
+    def wrapper(*args, **kwargs):
+        st = time.time()
+        res = func(*args, **kwargs)
+        et = time.time()
+        dt = et - st
+        print(f'Time of work: {dt}')
+        return res
+
+    return wrapper
+
+
+# Декоратор производной функции.
+def decorator_differential(dx=0.001):
+    """ Декоратор производной функции
+    :param dx: погрешность
+    :return: ссылка на декоратор проивзодной
+    """
+
+    def differential(func):
+        @wraps(func)  # Для сохр докум, имени и тд.
+        def wrapper(num, *args, **kwargs):
+            res = (func(num + dx, *args, **kwargs) - func(num, *args, **kwargs)) / dx
+            return res
+
+        # Просто сохраняем имя и документацию настоящей функции.
+        # Но 2 способ, импортировать: from functools import wraps.
+
+        # wrapper.__name__ = func.__name__
+        # wrapper.__doc__ = func.__doc__
+
+        return wrapper
+
+    return differential
+
+
+# recursion.
 def get_files(path, depth=0):
     """ Раскрытие словаря.
     Ex.
@@ -74,18 +112,6 @@ def counter(start=0):
     return step
 
 
-def test_time(func):
-    def wrapper(*args, **kwargs):
-        st = time.time()
-        res = func(*args, **kwargs)
-        et = time.time()
-        dt = et - st
-        print(f'Time of work: {dt}')
-        return res
-
-    return wrapper
-
-
 @test_time
 def NOD(num1, num2):
     """Вычисляется НОД для чисел a, b по алгоритму Евклида
@@ -98,3 +124,25 @@ def NOD(num1, num2):
     while num2 != 0:
         num1, num2 = num2, num1 % num2
     return num1
+
+
+@test_time
+def trim_string(disk, *args, sep='\\', **kwargs):
+    """
+    Ex. trim_string('C:', 'Users', 'dimap', 'PycharmProjects', 'tests', sep='\\', trim=True)
+    :param disk: имя диска str()
+    :param args: всякие слова str()
+    :param sep: разделитель
+    :param kwargs: trim = False|True
+    :return:
+    """
+    args = (disk,) + args
+    if 'trim' in kwargs and kwargs['trim']:
+        args = [el.strip() for el in args]
+
+    return sep.join(args)
+
+
+@decorator_differential(0.000001)
+def sin_x(number):
+    return math.sin(number)
