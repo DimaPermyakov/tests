@@ -51,4 +51,16 @@ F = {
 }
 get_files(F)
 print(factorial(3))'''
-# Check changing of the branch.
+# lambda.
+'''
+sum = lambda a, b: a + b
+print(sum(1, 2))
+lst = [1, 2, lambda: print('Hello'), 3, 4]
+lst[2]()
+
+a = [1, 2, 3, 4, -4, -3, 24]
+a = get_filter(a, lambda num: num < 0)
+print(*a)
+'''
+
+print(NOD(1, 56))
