@@ -1,4 +1,7 @@
 # recursion.
+import time
+
+
 def get_files(path, depth=0):
     """ Раскрытие словаря.
     Ex.
@@ -38,6 +41,52 @@ def factorial(num):
         return num * factorial(num - 1)
 
 
+# Lambda function.
+def get_filter(lst, filter_func=None):
+    """
+    :param lst: список
+    :param filter_func: лямбда функция
+    :return: новый список
+    """
+    if filter_func is None:
+        return lst
+    res = []
+    for el in lst:
+        if filter_func(el):
+            res.append(el)
+    return res
+
+
+def counter(start=0):
+    """ Счётчик.
+    Ex.
+    1. c = counter(10)
+    2. print(c()).
+    :param start: начальное значение.
+    :return: ссылку на вложенную функцию, где изменяем start.
+    """
+
+    def step():
+        nonlocal start
+        start += 1
+        return start
+
+    return step
+
+
+def test_time(func):
+    def wrapper(*args, **kwargs):
+        st = time.time()
+        res = func(*args, **kwargs)
+        et = time.time()
+        dt = et - st
+        print(f'Time of work: {dt}')
+        return res
+
+    return wrapper
+
+
+@test_time
 def NOD(num1, num2):
     """Вычисляется НОД для чисел a, b по алгоритму Евклида
     :param num1: первое число
