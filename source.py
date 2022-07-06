@@ -1,5 +1,5 @@
 import time
-import math
+import math  # Чтобы прочитать, жми ctrl.
 from functools import wraps  # для сохранения имени и документации функций при декораторах.
 
 
@@ -146,3 +146,16 @@ def trim_string(disk, *args, sep='\\', **kwargs):
 @decorator_differential(0.000001)
 def sin_x(number):
     return math.sin(number)
+
+
+def decorator_transposition(func):
+    def wrapper(matr):
+        matr = [[row[i] for row in matr] for i in range(len(matr[0]))]
+        return matr
+
+    return wrapper
+
+
+@decorator_transposition
+def transpose_the_matrix(matr):
+    return matr
