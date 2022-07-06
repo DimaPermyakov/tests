@@ -159,3 +159,15 @@ def decorator_transposition(func):
 @decorator_transposition
 def transpose_the_matrix(matr):
     return matr
+
+
+def is_simple(num):
+    if num == 2 or num == 3:
+        return True
+    if num % 2 == 0 or num < 2:
+        return False
+    for i in range(3, int(num ** 0.5) + 1, 2):
+        if num % i == 0:
+            return False
+
+    return True

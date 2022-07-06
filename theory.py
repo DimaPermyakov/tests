@@ -133,3 +133,45 @@ with open('out.bin', 'rb') as file:
     all_text = pickle.load(file)
     print(*all_text)
 '''
+
+# Функция filter.
+'''
+lst = [1, 2, 3, 4, 5, 6, 8]
+
+# С помощью анонимной функции.
+res = filter(lambda num: num % 2 == 0, lst)
+print(res)
+for el in res:
+    print(el, end=' ')
+print()
+
+# С помощью функции.
+res2 = filter(source.is_simple, lst)
+for el in res2:
+    print(el, end=' ')
+
+# Простые нечётные.
+res2 = filter(lambda num: num % 2 == 0, filter(source.is_simple, lst))
+'''
+# Функция zip.
+'''
+lst1 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+lst2 = [10, 11, 12, 13]
+lst3 = 'Hello python'
+res = zip(lst1, lst2, lst3)
+print(res)
+print(*res, sep='\n')
+print('---------------')
+res = zip(lst1, lst2, lst3)
+res2 = zip(*res)
+print(*res2, sep='\n')
+'''
+# Функция Sorted. Для .sort аналогично.
+'''
+lst = [-1, 2, 24, -534, 53, 7]
+lst_sorted = sorted(lst, key=lambda num: num % 2)
+print(lst_sorted)
+cities = ['Москва', 'Тверь', 'Смоленск', 'Псков']
+print(sorted(cities, key=len))  # Сортрировка по длине слова.
+print(sorted(cities, key=lambda word: word[-1]))  # По последей букве.
+'''
