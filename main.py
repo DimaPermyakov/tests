@@ -119,17 +119,14 @@ def cross_zero(using_bot=False):
 
 
 def print_cross_zero(arr):
-    # print('   ', arr[:3])
-    # print('   ', arr[3:6])
-    # print('   ', arr[6:])
-    print('\n-------------------------')
+    print('\n' + '-' * 25)
     print(end='|')
     for i, el in enumerate(arr):
         print(' ' + el, end=' |')
         if i == 2 or i == 5:
-            print('\n-------------------------')
+            print('\n' + '-' * 25)
             print(end='|')
-    print('\n-------------------------')
+    print('\n' + '-' * 25)
 
 
 print(cross_zero(using_bot=True))
